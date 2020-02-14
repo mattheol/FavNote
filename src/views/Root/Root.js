@@ -6,13 +6,18 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from 'themes/mainTheme';
 import bulbIcon from 'assets/icons/bulb.svg';
 import plusIcon from 'assets/icons/plus.svg';
-
+import Card from 'components/Card/Card';
+import styled from 'styled-components';
 import ButtonIcon from '../../components/ButtonIcon/ButtonIcon';
 
+const GridWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const Root = () => (
   <div>
     <GlobalStyle />
-    <h1>Hello Mati</h1>
     <ThemeProvider theme={theme}>
       <>
         <Button>Close / Save</Button>
@@ -20,6 +25,11 @@ const Root = () => (
         <Input search placeholder="search" />
         <ButtonIcon icon={bulbIcon} />
         <ButtonIcon active icon={plusIcon} />
+        <GridWrapper>
+          <Card cardType="twitter" />
+          <Card cardType="note" />
+          <Card cardType="article" />
+        </GridWrapper>
       </>
     </ThemeProvider>
   </div>
