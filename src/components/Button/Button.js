@@ -1,23 +1,23 @@
 import styled, { css } from 'styled-components';
 
 const Button = styled.button`
-  background-color: #ffd82b;
-  width: ${({ width }) => width || '220px'};
+  background-color: ${({ theme }) => theme.primary};
+  width: 220px;
   height: 47px;
   border: none;
   border-radius: 50px;
   font-family: 'Montserrat';
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1.6rem;
   text-transform: uppercase;
 
-  ${({ secondary }) =>
+  ${({ secondary, theme }) =>
     secondary &&
     css`
-      width: 105px;
-      height: 30px;
-      font-size: 10px;
-      background-color: #e6e6e6;
+      width: 10.5rem;
+      height: 3rem;
+      font-size: 1rem;
+      background-color: ${theme.grey200};
     `}
 `;
 
