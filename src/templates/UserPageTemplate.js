@@ -33,14 +33,16 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const UserPageTemplate = ({ children, pageType }) => (
+const UserPageTemplate = ({ children, pageType, numberOfNotes }) => (
   <>
     <Sidebar pageType={pageType} />
     <StyledWrapper>
       <StyledPageHeader>
         <Input search placeholder="search" />
-        <StyledHeading>{pageType}</StyledHeading>
-        <StyledParagraph>6 {pageType}</StyledParagraph>
+        <StyledHeading big>{pageType}</StyledHeading>
+        <StyledParagraph>
+          {numberOfNotes} {pageType}
+        </StyledParagraph>
       </StyledPageHeader>
       <StyledGridWrapper>{children}</StyledGridWrapper>
     </StyledWrapper>
@@ -48,6 +50,7 @@ const UserPageTemplate = ({ children, pageType }) => (
 );
 
 UserPageTemplate.propTypes = {
+  numberOfNotes: PropTypes.number.isRequired,
   children: PropTypes.array.isRequired,
   pageType: PropTypes.string.isRequired,
 };

@@ -21,12 +21,23 @@ class DetailsPage extends React.Component {
   }
 
   render() {
+    const note = {
+      title: 'Wish you React',
+      content:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
+      articleUrl: 'https://youtube.com/helloroman',
+      created: '1 day',
+      twitterName: 'sarah_edo',
+    };
     return (
-      <DetailsTemplate pageType={this.state.pageType}>
-        <>
-          <h1>HUHUH</h1>
-        </>
-      </DetailsTemplate>
+      <DetailsTemplate
+        pageType={this.state.pageType}
+        title={note.title}
+        content={note.content}
+        articleUrl={note.articleUrl}
+        created={note.created}
+        twitterName={note.twitterName}
+      />
     );
   }
 }

@@ -38,7 +38,7 @@ const twitters = [
 ];
 
 const Twitters = () => (
-  <UserPageTemplate pageType="twitters">
+  <UserPageTemplate pageType="twitters" numberOfNotes={twitters.length}>
     {twitters.map(item => (
       <Card
         cardType="twitters"

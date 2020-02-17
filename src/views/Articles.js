@@ -38,7 +38,7 @@ const articles = [
 ];
 
 const Articles = () => (
-  <UserPageTemplate pageType="articles">
+  <UserPageTemplate pageType="articles" numberOfNotes={articles.length}>
     {articles.map(item => (
       <Card
         cardType="articles"
