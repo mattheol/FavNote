@@ -6,6 +6,8 @@ import Paragraph from 'components/Paragraph/Paragraph';
 import Heading from 'components/Heading/Heading';
 import Button from 'components/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
+import { connect } from 'react-redux';
+import { removeItemAction } from 'actions';
 
 class Card extends React.Component {
   state = {
@@ -23,6 +25,7 @@ class Card extends React.Component {
       twitterName,
       articleUrl,
       content,
+      removeItem,
     } = this.props;
 
     if (this.state.redirect) {
@@ -40,7 +43,9 @@ class Card extends React.Component {
         </InnerWrapper>
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>
-          <Button secondary>REMOVE</Button>
+          <Button onClick={() => removeItem(cardType, id)} secondary>
+            REMOVE
+          </Button>
         </InnerWrapper>
       </StyledWrapper>
     );
@@ -126,4 +131,8 @@ const StyledLinkButton = styled.a`
   transform: translateY(-50%);
 `;
 
-export default Card;
+const mapDispatchToProps = dispatch => ({
+  removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
+});
+
+export default connect(null, mapDispatchToProps)(Card);
