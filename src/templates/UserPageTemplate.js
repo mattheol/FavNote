@@ -4,6 +4,9 @@ import Input from 'components/Input/Input';
 import Heading from 'components/Heading/Heading';
 import Paragraph from 'components/Paragraph/Paragraph';
 import styled from 'styled-components';
+import ButtonIcon from 'components/ButtonIcon/ButtonIcon';
+import plusIcon from 'assets/icons/plus.svg';
+import NewItemBar from 'components/NewItemBar/NewItemBar';
 import Sidebar from '../components/Sidebar/Sidebar';
 
 const StyledWrapper = styled.div`
@@ -33,21 +36,55 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const UserPageTemplate = ({ children, pageType, numberOfNotes }) => (
-  <>
-    <Sidebar pageType={pageType} />
-    <StyledWrapper>
-      <StyledPageHeader>
-        <Input search placeholder="search" />
-        <StyledHeading big>{pageType}</StyledHeading>
-        <StyledParagraph>
-          {numberOfNotes} {pageType}
-        </StyledParagraph>
-      </StyledPageHeader>
-      <StyledGridWrapper>{children}</StyledGridWrapper>
-    </StyledWrapper>
-  </>
-);
+const StyledButtonIcon = styled(ButtonIcon)`
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  border-radius: 50%;
+  background-color: ${({ activeColor, theme }) => theme[activeColor]};
+  background-size: 40%;
+  z-index: 10000;
+`;
+
+class UserPageTemplate extends React.Component {
+  state = {
+    isItemBarVisible: false,
+  };
+
+  handlePlusButtonClick = () => {
+    this.setState(prevState => ({
+      isItemBarVisible: !prevState.isItemBarVisible,
+    }));
+  };
+
+  render() {
+    const { children, pageType, numberOfNotes } = this.props;
+    return (
+      <>
+        <Sidebar pageType={pageType} />
+        <StyledWrapper>
+          <StyledPageHeader>
+            <Input search placeholder="search" />
+            <StyledHeading big>{pageType}</StyledHeading>
+            <StyledParagraph>
+              {numberOfNotes} {pageType}
+            </StyledParagraph>
+          </StyledPageHeader>
+          <StyledGridWrapper>{children}</StyledGridWrapper>
+          <StyledButtonIcon
+            icon={plusIcon}
+            activeColor={pageType}
+            onClick={this.handlePlusButtonClick}
+          />
+          <NewItemBar
+            isVisible={this.state.isItemBarVisible}
+            pageType={pageType}
+          />
+        </StyledWrapper>
+      </>
+    );
+  }
+}
 
 UserPageTemplate.propTypes = {
   numberOfNotes: PropTypes.number.isRequired,
