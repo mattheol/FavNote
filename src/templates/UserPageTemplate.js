@@ -57,6 +57,12 @@ class UserPageTemplate extends React.Component {
     }));
   };
 
+  handleClose = () => {
+    this.setState({
+      isItemBarVisible: false,
+    });
+  };
+
   render() {
     const { children, pageType, numberOfNotes } = this.props;
     return (
@@ -77,6 +83,7 @@ class UserPageTemplate extends React.Component {
             onClick={this.handlePlusButtonClick}
           />
           <NewItemBar
+            handleClose={this.handleClose}
             isVisible={this.state.isItemBarVisible}
             pageType={pageType}
           />

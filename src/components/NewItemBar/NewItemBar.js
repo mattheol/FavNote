@@ -4,6 +4,9 @@ import Heading from 'components/Heading/Heading';
 import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 import PropTypes from 'prop-types';
+import { addItemAction } from 'actions';
+import { Formik, Form } from 'formik';
+import { connect } from 'react-redux';
 
 const StyledWrapper = styled.div`
   border-left: 10px solid ${({ theme, activeColor }) => theme[activeColor]};
@@ -35,14 +38,73 @@ const StyledInput = styled(Input)`
   margin-top: 30px;
 `;
 
-const NewItemBar = ({ pageType, isVisible }) => (
-  <StyledWrapper activeColor={pageType} isVisible={isVisible}>
-    <Heading big>Create new {pageType.substr(0, pageType.length - 1)} </Heading>
-    <Input placeholder={pageType === 'twitters' ? 'Account Name' : 'Title'} />
-    {pageType === 'articles' && <StyledInput placeholder="link" />}
-    <StyledTextArea as="textarea" placeholder="Description" />
-    <Button activeColor={pageType}>Add Note</Button>
-  </StyledWrapper>
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const NewItemBar = ({ pageType, isVisible, addItem, handleClose }) => (
+  <Formik
+    initialValues={{
+      title: '',
+      content: '',
+      articleUrl: '',
+      twitterName: '',
+      created: '',
+    }}
+    onSubmit={values => {
+      addItem(pageType, values);
+      handleClose();
+    }}
+  >
+    {({ values, handleChange, handleBlur }) => (
+      <StyledWrapper activeColor={pageType} isVisible={isVisible}>
+        <StyledForm>
+          <Heading big>
+            Create new {pageType.substr(0, pageType.length - 1)}{' '}
+          </Heading>
+          <StyledInput
+            type="text"
+            name="title"
+            placeholder="title"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.title}
+          />
+          {pageType === 'twitters' && (
+            <StyledInput
+              placeholder="twitter name eg. hello_roman"
+              type="text"
+              name="twitterName"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.twitterName}
+            />
+          )}
+          {pageType === 'articles' && (
+            <StyledInput
+              placeholder="link"
+              type="text"
+              name="articleUrl"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.articleUrl}
+            />
+          )}
+          <StyledTextArea
+            name="content"
+            as="textarea"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.content}
+          />
+          <Button type="submit" activeColor={pageType}>
+            Add Note
+          </Button>
+        </StyledForm>
+      </StyledWrapper>
+    )}
+  </Formik>
 );
 
 NewItemBar.propTypes = {
@@ -55,4 +117,9 @@ NewItemBar.defaultProps = {
   isVisible: true,
 };
 
-export default NewItemBar;
+const mapDispatchToProps = dispatch => ({
+  addItem: (itemType, itemContent) =>
+    dispatch(addItemAction(itemType, itemContent)),
+});
+
+export default connect(null, mapDispatchToProps)(NewItemBar);
