@@ -26,7 +26,7 @@ const StyledButton = styled(Button)`
 
 const StyledWrapper = styled.div`
   max-width: 800px;
-  padding: 55px 150px 25px 70px;
+  padding: 55px 150px 25px 220px;
   position: relative;
 `;
 

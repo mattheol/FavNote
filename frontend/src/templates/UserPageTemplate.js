@@ -10,7 +10,7 @@ import NewItemBar from 'components/NewItemBar/NewItemBar';
 import Sidebar from '../components/Sidebar/Sidebar';
 
 const StyledWrapper = styled.div`
-  padding: 25px 150px 25px 70px;
+  padding: 25px 150px 25px 220px;
 `;
 
 const StyledGridWrapper = styled.div`
