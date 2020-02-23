@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Heading from 'components/Heading/Heading';
 import Button from 'components/Button/Button';
 import logoIcon from 'assets/icons/logo.svg';
+import { Link } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 
 const Wrapper = styled.div`
@@ -46,23 +47,52 @@ const StyledLogo = styled.img`
   padding: 0;
 `;
 
-const LoginPage = () => (
-  <Wrapper>
-    <StyledLogo src={logoIcon} />
-    <Heading style={{ marginTop: '0', textAlign: 'center' }}>
-      Your new favourite online notes experience
-    </Heading>
-    <StyledForm>
-      <Heading style={{ textAlign: 'center', margin: '0' }}>Sing in</Heading>
-      <StyledInput placeholder="login" />
-      <StyledInput placeholder="password" />
-      <Button style={{ marginTop: '30px' }} activeColor="notes">
-        {' '}
-        Login{' '}
-      </Button>
-      <StyledLink href="yotube.com">I want to register</StyledLink>
-    </StyledForm>
-  </Wrapper>
-);
+class LoginPage extends React.Component {
+  state = {
+    isLoginPath: true,
+  };
+
+  componentDidMount() {
+    console.log('xd');
+    const { match } = this.props;
+    if (match.path === '/register') {
+      this.setState({ isLoginPath: false });
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.match.path === '/register' && this.state.isLoginPath) {
+      this.setState({ isLoginPath: false });
+    }
+    if (this.props.match.path === '/login' && !this.state.isLoginPath) {
+      this.setState({ isLoginPath: true });
+    }
+  }
+
+  render() {
+    const { isLoginPath } = this.state;
+    return (
+      <Wrapper>
+        <StyledLogo src={logoIcon} />
+        <Heading style={{ marginTop: '0', textAlign: 'center' }}>
+          Your new favourite online notes experience
+        </Heading>
+        <StyledForm>
+          <Heading style={{ textAlign: 'center', margin: '0' }}>
+            Sign {isLoginPath ? 'in' : 'up'}
+          </Heading>
+          <StyledInput placeholder="username" />
+          <StyledInput placeholder="password" />
+          <Button style={{ marginTop: '30px' }} activeColor="notes">
+            {isLoginPath ? 'log in' : 'register'}
+          </Button>
+          <StyledLink as={Link} to={`/${isLoginPath ? 'register' : 'login'}`}>
+            I want to {isLoginPath ? 'register' : 'log in'}
+          </StyledLink>
+        </StyledForm>
+      </Wrapper>
+    );
+  }
+}
 
 export default LoginPage;
