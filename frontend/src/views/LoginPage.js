@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import Heading from 'components/Heading/Heading';
 import Button from 'components/Button/Button';
 import logoIcon from 'assets/icons/logo.svg';
-import { Link } from 'react-router-dom';
+import { authenticate as authenticateAction } from 'actions';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Form, Formik } from 'formik';
 
 const Wrapper = styled.div`
@@ -53,7 +55,6 @@ class LoginPage extends React.Component {
   };
 
   componentDidMount() {
-    console.log('xd');
     const { match } = this.props;
     if (match.path === '/register') {
       this.setState({ isLoginPath: false });
@@ -71,8 +72,14 @@ class LoginPage extends React.Component {
 
   render() {
     const { isLoginPath } = this.state;
+    const { authenticate } = this.props;
+    const { userID } = this.props;
+    if (userID) {
+      return <Redirect to="/notes" />;
+    }
     return (
       <Wrapper>
+        {<Heading>{userID}</Heading>}
         <StyledLogo src={logoIcon} />
         <Heading style={{ marginTop: '0', textAlign: 'center' }}>
           Your new favourite online notes experience
@@ -81,11 +88,41 @@ class LoginPage extends React.Component {
           <Heading style={{ textAlign: 'center', margin: '0' }}>
             Sign {isLoginPath ? 'in' : 'up'}
           </Heading>
-          <StyledInput placeholder="username" />
-          <StyledInput placeholder="password" />
-          <Button style={{ marginTop: '30px' }} activeColor="notes">
-            {isLoginPath ? 'log in' : 'register'}
-          </Button>
+          <Formik
+            initialValues={{
+              username: '',
+              password: '',
+            }}
+            onSubmit={values => {
+              authenticate(values.username, values.password);
+            }}
+          >
+            {({ values, handleChange, handleBlur }) => (
+              <Form style={{ display: 'flex', flexDirection: 'column' }}>
+                <StyledInput
+                  name="username"
+                  placeholder="username"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.username}
+                />
+                <StyledInput
+                  name="password"
+                  placeholder="password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                />
+                <Button
+                  type="submit"
+                  style={{ marginTop: '30px' }}
+                  activeColor="notes"
+                >
+                  {isLoginPath ? 'log in' : 'register'}
+                </Button>
+              </Form>
+            )}
+          </Formik>
           <StyledLink as={Link} to={`/${isLoginPath ? 'register' : 'login'}`}>
             I want to {isLoginPath ? 'register' : 'log in'}
           </StyledLink>
@@ -95,4 +132,10 @@ class LoginPage extends React.Component {
   }
 }
 
-export default LoginPage;
+const mapStateToProps = ({ userID }) => ({ userID });
+
+const mapDispatchToProps = dispatch => ({
+  authenticate: (username, password) =>
+    dispatch(authenticateAction(username, password)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
