@@ -21,7 +21,6 @@ class Card extends React.Component {
       id,
       cardType,
       title,
-      created,
       twitterName,
       articleUrl,
       content,
@@ -35,7 +34,6 @@ class Card extends React.Component {
       <StyledWrapper onClick={this.handleCardClick}>
         <InnerWrapper activeColor={cardType}>
           <StyledHeading>{title}</StyledHeading>
-          <DateInfo>{created}</DateInfo>
           {cardType === 'twitters' && (
             <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />
           )}
@@ -94,12 +92,6 @@ const InnerWrapper = styled.div`
       flex-direction: column;
       justify-content: space-between;
     `}
-`;
-
-const DateInfo = styled(Paragraph)`
-  margin: 0 0 5px;
-  font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.xs};
 `;
 
 const StyledHeading = styled(Heading)`

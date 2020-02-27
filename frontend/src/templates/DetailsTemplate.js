@@ -62,7 +62,9 @@ const DetailsTemplate = ({
       <TitleParagraph>{created}</TitleParagraph>
       <StyledParagraph>{content}</StyledParagraph>
       {pageType === 'articles' && (
-        <StyledLink href={articleUrl}>Open article</StyledLink>
+        <StyledLink as="a" href={articleUrl}>
+          Open article
+        </StyledLink>
       )}
       {pageType === 'twitters' && (
         <StyledImage src={`https://avatars.io/twitter/${twitterName}`} />
@@ -76,9 +78,8 @@ const DetailsTemplate = ({
 
 DetailsTemplate.propTypes = {
   pageType: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  created: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  content: PropTypes.string,
   twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
 };
@@ -86,6 +87,8 @@ DetailsTemplate.propTypes = {
 DetailsTemplate.defaultProps = {
   twitterName: null,
   articleUrl: null,
+  title: null,
+  content: null,
 };
 
 export default DetailsTemplate;

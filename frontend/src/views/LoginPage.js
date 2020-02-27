@@ -79,7 +79,6 @@ class LoginPage extends React.Component {
     }
     return (
       <Wrapper>
-        {<Heading>{userID}</Heading>}
         <StyledLogo src={logoIcon} />
         <Heading style={{ marginTop: '0', textAlign: 'center' }}>
           Your new favourite online notes experience
@@ -98,7 +97,13 @@ class LoginPage extends React.Component {
             }}
           >
             {({ values, handleChange, handleBlur }) => (
-              <Form style={{ display: 'flex', flexDirection: 'column' }}>
+              <Form
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
                 <StyledInput
                   name="username"
                   placeholder="username"

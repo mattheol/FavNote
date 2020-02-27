@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+  userID: '5e51715b4380fe07e075e7ab',
+};
 /*
   notes: 
     {

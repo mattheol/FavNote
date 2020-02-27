@@ -11,8 +11,8 @@ import DetailsPage from './DetailsPage';
 
 const Root = () => (
   <Provider store={store}>
-    <MainTemplate>
-      <BrowserRouter>
+    <BrowserRouter>
+      <MainTemplate>
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/notes" />} />
           <Route exact path="/login" component={LoginPage} />
@@ -24,8 +24,8 @@ const Root = () => (
           <Route exact path="/articles" component={Articles} />
           <Route path="/articles/:id" component={DetailsPage} />
         </Switch>
-      </BrowserRouter>
-    </MainTemplate>
+      </MainTemplate>
+    </BrowserRouter>
   </Provider>
 );
 
