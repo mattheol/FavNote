@@ -2,24 +2,36 @@ import React from 'react';
 import UserPageTemplate from 'templates/UserPageTemplate';
 import Card from 'components/Card/Card';
 import { connect } from 'react-redux';
+import { fetchNotes as fetchNotesAction } from '../actions';
 
-const Notes = ({ notes }) => (
-  <UserPageTemplate pageType="notes" numberOfNotes={notes.length}>
-    {notes.map(item => (
-      <Card
-        cardType="notes"
-        title={item.title}
-        content={item.content}
-        created={item.created}
-        id={item.id}
-        key={item.id}
-      />
-    ))}
-  </UserPageTemplate>
-);
+class Notes extends React.Component {
+  componentDidMount() {
+    this.props.fetchNotes();
+  }
+  render() {
+    const { notes = [] } = this.props;
+    return (
+      <UserPageTemplate pageType="notes" numberOfNotes={notes.length}>
+        {notes.map(item => (
+          <Card
+            cardType="notes"
+            title={item.title}
+            content={item.content}
+            id={item._id}
+            key={item._id}
+          />
+        ))}
+      </UserPageTemplate>
+    );
+  }
+}
 
 const mapStateToProps = ({ notes }) => ({
   notes,
 });
 
-export default connect(mapStateToProps)(Notes);
+const mapDispatchToProps = dispatch => ({
+  fetchNotes: () => dispatch(fetchNotesAction('notes')),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notes);

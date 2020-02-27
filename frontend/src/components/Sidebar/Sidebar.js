@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ButtonIcon from 'components/ButtonIcon/ButtonIcon';
@@ -76,7 +76,7 @@ const Sidebar = ({ pageType }) => (
         />
       </li>
     </StyledLinksList>
-    <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
+    <StyledLogoutButton as={Link} to="/login" icon={logoutIcon} />
   </StyledWrapper>
 );
 

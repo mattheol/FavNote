@@ -1,5 +1,6 @@
-const initialState = {
-  notes: [
+const initialState = {};
+/*
+  notes: 
     {
       id: 1,
       title: 'Wake me up when Vue ends',
@@ -96,11 +97,15 @@ const initialState = {
       created: '10 days',
       twitterName: 'sarah_edo',
     },
-  ],
-};
+*/
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'FETCH_NOTES_SUCCESS':
+      return {
+        ...state,
+        [action.payload.notesType]: action.payload.data,
+      };
     case 'AUTHENTICATE_SUCCESS':
       return {
         ...state,

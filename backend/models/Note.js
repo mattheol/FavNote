@@ -19,7 +19,7 @@ const NoteSchema = new Schema({
   },
   articleUrl: {
     type: String,
-    defualt: null
+    default: null
   },
   twitterName: {
     type: String,
