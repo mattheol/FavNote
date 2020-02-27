@@ -101,6 +101,11 @@ const initialState = {};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'LOGOUT':
+      return {
+        ...state,
+        userID: null,
+      };
     case 'FETCH_NOTES_SUCCESS':
       return {
         ...state,

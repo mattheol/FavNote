@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ButtonIcon from 'components/ButtonIcon/ButtonIcon';
@@ -47,7 +48,7 @@ const StyledLinksList = styled.ul`
   list-style: none;
 `;
 
-const Sidebar = ({ pageType }) => (
+const Sidebar = ({ pageType, logout }) => (
   <StyledWrapper activeColor={pageType}>
     <StyledLogoLink to="/" />
     <StyledLinksList>
@@ -76,7 +77,12 @@ const Sidebar = ({ pageType }) => (
         />
       </li>
     </StyledLinksList>
-    <StyledLogoutButton as={Link} to="/login" icon={logoutIcon} />
+    <StyledLogoutButton
+      as={Link}
+      to="/login"
+      icon={logoutIcon}
+      onClick={logout}
+    />
   </StyledWrapper>
 );
 
@@ -84,4 +90,8 @@ Sidebar.propTypes = {
   pageType: PropTypes.string.isRequired,
 };
 
-export default Sidebar;
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch({ type: 'LOGOUT' }),
+});
+
+export default connect(null, mapDispatchToProps)(Sidebar);
