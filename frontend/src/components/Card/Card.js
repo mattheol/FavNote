@@ -7,7 +7,7 @@ import Heading from 'components/Heading/Heading';
 import Button from 'components/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
 import { connect } from 'react-redux';
-import { removeItemAction } from 'actions';
+import { deleteNote as removeItemAction } from 'actions';
 
 class Card extends React.Component {
   state = {
@@ -31,8 +31,8 @@ class Card extends React.Component {
       return <Redirect to={`${cardType}/${id}`} />;
     }
     return (
-      <StyledWrapper onClick={this.handleCardClick}>
-        <InnerWrapper activeColor={cardType}>
+      <StyledWrapper>
+        <InnerWrapper activeColor={cardType} onClick={this.handleCardClick}>
           <StyledHeading>{title}</StyledHeading>
           {cardType === 'twitters' && (
             <StyledAvatar src={`https://avatars.io/twitter/${twitterName}`} />

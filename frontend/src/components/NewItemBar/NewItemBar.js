@@ -4,7 +4,7 @@ import Heading from 'components/Heading/Heading';
 import Input from 'components/Input/Input';
 import Button from 'components/Button/Button';
 import PropTypes from 'prop-types';
-import { addItemAction } from 'actions';
+import { addNote as addItemAction } from 'actions';
 import { Formik, Form } from 'formik';
 import { connect } from 'react-redux';
 

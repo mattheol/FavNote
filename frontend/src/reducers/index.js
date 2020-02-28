@@ -103,6 +103,22 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'ADD_NOTE_SUCCESS':
+      return {
+        ...state,
+        [action.payload.noteType]: [
+          ...state[action.payload.noteType],
+          action.payload.data,
+        ],
+      };
+    case 'REMOVE_NOTE_SUCCESS':
+      console.log(action.payload);
+      return {
+        ...state,
+        [action.payload.noteType]: state[action.payload.noteType].filter(
+          item => item._id !== action.payload.id,
+        ),
+      };
     case 'LOGOUT':
       return {
         ...state,

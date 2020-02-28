@@ -5,17 +5,6 @@ export const removeItemAction = (itemType, id) => ({
   payload: { itemType, id },
 });
 
-export const addItemAction = (itemType, itemContent) => ({
-  type: 'ADD_ITEM',
-  payload: {
-    itemType,
-    item: {
-      id: 5,
-      ...itemContent,
-    },
-  },
-});
-
 export const authenticate = (username, password) => dispatch => {
   dispatch({ type: 'AUTHENTICATE_REQUEST' });
   return axios
@@ -35,4 +24,30 @@ export const fetchNotes = notesType => (dispatch, getState) => {
       dispatch({ type: 'FETCH_NOTES_SUCCESS', payload: { data, notesType } }),
     )
     .catch(err => dispatch({ type: 'FETCH_NOTES_FAILURE' }));
+};
+
+export const addNote = (noteType, newItem) => (dispatch, getState) => {
+  dispatch({ type: 'ADD_NOTE_REQUEST' });
+
+  return axios
+    .post(`http://localhost:8080/note`, {
+      ...newItem,
+      type: noteType,
+      userID: getState().userID,
+    })
+    .then(({ data }) =>
+      dispatch({ type: 'ADD_NOTE_SUCCESS', payload: { data, noteType } }),
+    )
+    .catch(err => dispatch({ type: 'ADD_NOTES_FAILURE' }));
+};
+
+export const deleteNote = (noteType, id) => dispatch => {
+  dispatch({ type: 'REMOVE_NOTE_REQUEST' });
+
+  return axios
+    .delete(`http://localhost:8080/note/${id}`)
+    .then(() =>
+      dispatch({ type: 'REMOVE_NOTE_SUCCESS', payload: { id, noteType } }),
+    )
+    .catch(err => dispatch({ type: 'REMOVE_NOTES_FAILURE' }));
 };
