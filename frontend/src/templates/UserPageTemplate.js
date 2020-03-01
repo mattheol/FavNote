@@ -11,6 +11,9 @@ import Sidebar from '../components/Sidebar/Sidebar';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 220px;
+  @media (max-width: 768px) {
+    padding: 110px 10px 20px 10px;
+  }
 `;
 
 const StyledGridWrapper = styled.div`

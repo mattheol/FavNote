@@ -23,7 +23,13 @@ const StyledWrapper = styled.nav`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  z-index: 9999;
+  z-index: 99999;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    height: 100px;
+    flex-direction: row;
+  }
 `;
 
 const StyledLogoLink = styled(NavLink)`
@@ -36,16 +42,25 @@ const StyledLogoLink = styled(NavLink)`
   background-size: 80%;
   border: none;
   margin-bottom: 10vh;
+  @media (max-width: 768px) {
+    margin-bottom: 0;
+  }
 `;
 
 const StyledLogoutButton = styled(ButtonIcon)`
   margin-top: auto;
+  @media (max-width: 768px) {
+    margin-top: 0;
+  }
 `;
 
 const StyledLinksList = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
+  @media (max-width: 768px) {
+    display: flex;
+  }
 `;
 
 const Sidebar = ({ pageType, logout }) => (

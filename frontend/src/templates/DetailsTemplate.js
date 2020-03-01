@@ -9,6 +9,9 @@ import Sidebar from '../components/Sidebar/Sidebar';
 
 const StyledHeading = styled(Heading)`
   margin: 0 0 10px 0;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 const StyledParagraph = styled(Paragraph)`
@@ -28,6 +31,12 @@ const StyledWrapper = styled.div`
   max-width: 800px;
   padding: 55px 150px 25px 220px;
   position: relative;
+  @media (max-width: 768px) {
+    padding: 150px 10px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const StyledImage = styled.img`
@@ -37,6 +46,9 @@ const StyledImage = styled.img`
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  @media (max-width: 768px) {
+    position: static;
+  }
 `;
 const StyledLink = styled.a`
   display: block;
@@ -59,6 +71,9 @@ const DetailsTemplate = ({
     <Sidebar pageType={pageType} />
     <StyledWrapper>
       <StyledHeading big>{title}</StyledHeading>
+      {pageType === 'twitters' && (
+        <StyledImage src={`https://avatars.io/twitter/${twitterName}`} />
+      )}
       <TitleParagraph>{created}</TitleParagraph>
       <StyledParagraph>{content}</StyledParagraph>
       {pageType === 'articles' && (
@@ -66,9 +81,7 @@ const DetailsTemplate = ({
           Open article
         </StyledLink>
       )}
-      {pageType === 'twitters' && (
-        <StyledImage src={`https://avatars.io/twitter/${twitterName}`} />
-      )}
+
       <StyledButton as={Link} to={`/${pageType}`} activeColor={pageType}>
         save / close
       </StyledButton>
