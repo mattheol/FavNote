@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const ButtonIcon = styled.button`
+  outline: none;
   display: block;
   width: 67px;
   height: 67px;

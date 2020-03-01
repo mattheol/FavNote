@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { Redirect } from 'react-router-dom';
 import Paragraph from 'components/Paragraph/Paragraph';
 import Heading from 'components/Heading/Heading';
@@ -65,6 +65,15 @@ Card.defaultProps = {
   articleUrl: null,
 };
 
+const cardAppear = keyframes`
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+`;
+
 const StyledWrapper = styled.div`
   min-height: 380px;
   box-shadow: 0 10px 30px -10px hsla(0, 0%, 0%, 0.1);
@@ -73,6 +82,7 @@ const StyledWrapper = styled.div`
   position: relative;
   display: grid;
   grid-template-rows: 0.25fr 1fr;
+  animation: ${cardAppear} 0.5s ease-in-out;
 `;
 
 const InnerWrapper = styled.div`

@@ -73,7 +73,7 @@ class UserPageTemplate extends React.Component {
         <Sidebar pageType={pageType} />
         <StyledWrapper>
           <StyledPageHeader>
-            <Input search placeholder="search" />
+            <Input search placeholder="search" autoComplete="off" />
             <StyledHeading big>{pageType}</StyledHeading>
             <StyledParagraph>
               {numberOfNotes} {pageType}

@@ -107,12 +107,14 @@ class LoginPage extends React.Component {
                 <StyledInput
                   name="username"
                   placeholder="username"
+                  autoComplete="off"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.username}
                 />
                 <StyledInput
                   name="password"
+                  type="password"
                   placeholder="password"
                   onChange={handleChange}
                   onBlur={handleBlur}

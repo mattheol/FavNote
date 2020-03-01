@@ -64,6 +64,7 @@ const NewItemBar = ({ pageType, isVisible, addItem, handleClose }) => (
             Create new {pageType.substr(0, pageType.length - 1)}{' '}
           </Heading>
           <StyledInput
+            autoComplete="off"
             type="text"
             name="title"
             placeholder="title"
@@ -83,6 +84,7 @@ const NewItemBar = ({ pageType, isVisible, addItem, handleClose }) => (
           )}
           {pageType === 'articles' && (
             <StyledInput
+              autoComplete="off"
               placeholder="link"
               type="text"
               name="articleUrl"
@@ -92,8 +94,10 @@ const NewItemBar = ({ pageType, isVisible, addItem, handleClose }) => (
             />
           )}
           <StyledTextArea
+            autoComplete="off"
             name="content"
             as="textarea"
+            placeholder="Description"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.content}
